@@ -3,6 +3,21 @@ from tensorflow.python.framework.graph_util import convert_variables_to_constant
 # %load src/graph_of.py
 from lucid.misc.io.reading import read
 
+from mpl_toolkits.mplot3d import Axes3D
+
+def threed_view(pf_agent,end,start=0):
+    d1,d2=get_index(pf_agent[start:end,:])
+
+    fig=plt.figure()
+    ax = Axes3D(fig,
+#         rect=[0, 0, .95, 1], elev=0, azim=0)
+        rect=[0, 0, 1, 1], elev=48, azim=134)
+
+    # ax.scatter(time_x[:,:,0] ,time_x[:,:,1] )
+    ax.scatter(d1,d2,pf_agent[start:end,:].reshape(1,-1))
+#     d1,d2=get_index(pf_agent[start:end,:])
+#     ax.scatter(d1,d2,pf_agent[start:end,:].reshape(1,-1))
+    ax.plot(d1,d2,'-y')
 
 def sess_pp():
 
@@ -116,6 +131,7 @@ def dl(var,name):
 
     with open(f'./data/vars/checkpoint_{name}.pkl', 'wb') as f:
         dill.dump(var, f)
+    print(f)
 
 
 def ll(var):
@@ -198,6 +214,13 @@ class GraphDef():
                 tf.train.write_graph(graph,'.','./data/vars/time_x.pb',as_text=False)
         return decorator
 
+    def graph_run(self,tensor,p):
+        def decorator(init_op):
+            with tf.Session() as sess:
+                init_op(p,sess)
+                v=sess.run(tensor)
+                dl(v,tensor.name)
+        return decorator
     def from_tfnode(self,tfnode):
         self.graph_def=tfnode.graph.as_graph_def()
 
