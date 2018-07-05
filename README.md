@@ -1,4 +1,4 @@
-<p align="right"><img width="40%" src="tree.jpg" /></p>
+<p align="left"><img width="40%" src="tree.png" /></p>
 
 the ipynb, and util is a exploring for a keras winner model of tensorflow
 1. exploring the graph instead of its source code
