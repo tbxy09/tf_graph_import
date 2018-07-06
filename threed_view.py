@@ -1,3 +1,4 @@
+import numpy as np
 def get_index(inp):
     a=np.zeros_like(inp)
     d1=np.where(a>-1)[0]
