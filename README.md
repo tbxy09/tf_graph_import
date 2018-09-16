@@ -7,5 +7,5 @@ the ipynb, and util is a exploring for a keras winner model of tensorflow
 result: still failed
 
 1. the graph variable issue, variable must import as a constant, then can be feed with value
-2. the graph has too many sub graph, there is operation in convert to const, the exact sub,
-hard to exact whole graph with multiple sub graph
+2. the graph has too many sub graph, there is operation in convert to const, the extract sub,
+hard to extract whole graph with multiple sub graph
